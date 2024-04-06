@@ -1,0 +1,76 @@
+#!/bin/sh
+#JossG
+#@JossG0x01 [Telegram]
+
+#########################
+# /dev/block/zram0#
+# /sys/block/zram0/#
+#########################
+
+#Zram
+sleep=1;
+swapoff /dev/block/zram0;
+echo 1 > /sys/block/zram0/reset;
+
+#ViRam
+echo 8192M > /sys/block/zram0/disksize;
+mkswap /dev/block/zram0;
+
+#Enable
+swapon /dev/block/zram0;
+
+#########################
+# /proc/sys/vm/#
+#########################
+
+# Virtual memory tweaks
+echo '100' > /proc/sys/vm/vfs_cache_pressure
+echo '8000' > /proc/sys/vm/min_free_kbytes
+echo '0' > /proc/sys/vm/oom_kill_allocating_task
+echo '100' > /proc/sys/vm/dirty_ratio
+echo '100' > /proc/sys/vm/dirty_background_ratio
+
+#########################
+# /sys/class/devfreq/#
+#########################
+
+#Thx @Matt
+#DDR&L3Cache module
+#Test drr
+chmod 446 /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+chmod 446 /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/max_freq
+chmod 446 /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/max_freq
+chmod 446 /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/min_freq 
+
+#Perf ddr
+echo 762 > /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+echo 10437 > /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/max_freq
+echo 15258 > /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/max_freq
+echo 15258 > /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/min_freq
+
+#Block ddr
+chmod 444 /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/min_freq
+chmod 444 /sys/class/devfreq/soc:qcom,cpu-llcc-ddr-bw/max_freq
+chmod 444 /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/max_freq
+chmod 444 /sys/class/devfreq/soc:qcom,cpu-cpu-llcc-bw/min_freq 
+
+#########################
+# /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,[?]#
+#########################
+
+#Thx @Matt
+#DDR&L3Cache module
+#Test freq
+chmod 446 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/min_freq
+chmod 446 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/min_freq
+chmod 446 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/min_freq
+
+#Perf freq
+echo 1612800000 > /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/min_freq
+echo 1612800000 > /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/min_freq
+echo 1612800000 > /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/min_freq
+
+#Block freq
+chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/min_freq
+chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/min_freq
+chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/min_freq
