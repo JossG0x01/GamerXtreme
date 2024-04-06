@@ -1,0 +1,52 @@
+echo "###################################"
+echo "Developed by: @JossG0x01 [Telegram]"
+echo "###################################"
+echo " "
+echo "- Version : 1.0"
+
+#########################
+# /proc/sys/vm/swappiness#
+#########################
+
+#Swappiness
+echo '160' > /proc/sys/vm/swappiness
+
+#########################
+# app_hibernation#
+#########################
+su -c device_config put app_hibernation app_hibernation_enabled true
+
+#########################
+# window_animation_scale#
+#########################
+
+#Animation
+settings put global window_animation_scale 0.80
+settings put global transition_animation_scale 0.80
+settings put global animator_duration_scale 0.75
+
+#########################
+# kill-all#
+#########################
+
+#Force apps
+am kill-all
+am kill logd
+killall -9 logd
+am kill logd.rc
+killall -9 logd.rc
+
+#########################
+# /proc/sys/vm/#
+#########################
+
+#Ram 
+echo 3 > /proc/sys/vm/drop_caches
+echo 1 > /proc/sys/vm/compact_memory
+
+sleep 2
+echo " "
+echo "On"
+sleep 1
+echo " "
+echo "Successfully applied"
