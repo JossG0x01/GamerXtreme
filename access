@@ -1,0 +1,8 @@
+#include <jni.h>
+#include <cstdlib>
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_com_example_myapplication_MainActivity_runShellCommand(JNIEnv* env, jobject /* this */) {
+    std::string command = "su -c \"pm disable com.google.android.gms/.update.SystemUpdateActivity\"";
+    return env->NewStringUTF(std::system(command.c_str()));
+}
