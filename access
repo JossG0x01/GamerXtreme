@@ -6,3 +6,23 @@ Java_com_example_myapplication_MainActivity_runShellCommand(JNIEnv* env, jobject
     std::string command = "su -c \"pm disable com.google.android.gms/.update.SystemUpdateActivity\"";
     return env->NewStringUTF(std::system(command.c_str()));
 }
+
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("su", "-c", "chmod 446 /dev/stune/top-app/schedtune.boost");
+            Process process = processBuilder.start();
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("True.");
+            } else {
+                System.out.println("False.");
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
