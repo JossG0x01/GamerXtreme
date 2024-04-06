@@ -1,6 +1,6 @@
-# Changelog
+### Changelog
 
-### sdm865 v1.1
-- Initial Release.
-- Scripts 865.
-- Disable Thermal/Test.
+- GamerXtreme v1.0
+Initial Release
+Scripts 865
+Disable Thermal/Test
