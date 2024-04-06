@@ -33,7 +33,7 @@ function hc_delete(){
     rm -rf $MODDIR/JossG/Service > /dev/null &
     rm -rf $MODDIR/JossG/Zram > /dev/null &
     # Update
-    rm -rf /data/adb/modules/GX
+    rm -rf /data/adb/modules/GL
 }
 hc_delete
 
