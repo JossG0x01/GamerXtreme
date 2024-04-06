@@ -1,0 +1,51 @@
+#!/bin/sh
+#JossG
+#@JossG0x01 [Telegram]
+
+#########################
+# pm disable com.google.android.gms/#
+#########################
+
+#Update Disable
+su -c "pm disable com.google.android.gms/.update.SystemUpdateActivity"
+su -c "pm disable com.google.android.gms/.update.SystemUpdateService"
+su -c "pm disable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver"
+su -c "pm disable com.google.android.gms/.update.SystemUpdateService$Receiver"
+su -c "pm disable com.google.android.gms/.update.Syste mUpdateService$SecretCodeReceiver"
+su -c "pm disable com.google.android.gsf/.update.SystemUpdateActivity"
+su -c "pm disable com.google.android.gsf/.update.SystemUpdatePanoActivity"
+su -c "pm disable com.google.android.gsf/.update.SystemUpdateService"
+su -c "pm disable com.google.android.gsf/.update.SystemUpdateService$Receiver"
+su -c "pm disable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
+
+#########################
+# pm disable com.google.android.gms/#
+#########################
+
+#GMS doze
+su -c "pm disable com.google.android.gms/com.google.android.gms.analytics.service.AnalyticsService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.analytics.AnalyticsService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.analytics.AnalyticsTaskService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.analytics.internal.PlayLogReportingService"
+su -c "pm disable com.google.android.gms/com.google.android.gms.analytics.AnalyticsReceiver"
+
+#########################
+# pm disable com.google.android.gms/#
+#########################
+
+#Disable
+su -c "pm disable com.google.android.gms/.ota.googlezip.net"
+su -c "pm disable com.google.android.gms/.ota-cache1.googlezip.net"
+su -c "pm disable com.google.android.gms/.update.execution.InstallationIntentOperation"
+su -c "pm disable com.google.android.gms/.chimera.GmsIntentOperationService"
+su -c "pm disable com.google.android.gms/.chimera.PersistentIntentOperationService"
+su -c "pm disable com.android.shell.tombstoned"
+
+#########################
+# /system/build.prop#
+#########################
+
+#DisableBlur
+update_file_string "ro.launcher.blur.appLaunch=0" /system/build.prop
+update_file_string "ro.surface_flinger.supports_background_blur=0" /system/build.prop
+update_file_string "ro.sf.blurs_are_expensive=0" /system/build.prop

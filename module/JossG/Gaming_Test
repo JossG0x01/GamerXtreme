@@ -1,0 +1,149 @@
+#!/bin/sh
+#JossG
+#@JossG0x01 [Telegram]
+
+#########################
+# /dev/stune/#
+#########################
+
+#Test boost
+chmod 446 /dev/stune/top-app/schedtune.boost
+
+#Perf boost
+echo "1" > /dev/stune/foreground/schedtune.prefer_idle
+echo 30 > /dev/stune/top-app/schedtune.boost
+echo "1" > /dev/stune/top-app/schedtune.prefer_idle
+
+#Block boost
+chmod 444 /dev/stune/top-app/schedtune.boost
+
+#########################
+# /dev/cpuset/#
+#########################
+
+#Test cpus
+chmod 446 /dev/cpuset/camera-daemon/cpus
+chmod 446 /dev/cpuset/dexopt/cpus
+chmod 446 /dev/cpuset/foreground/cpus
+chmod 446 /dev/cpuset/top-app/cpus
+
+#Perf cpus
+echo 0-7 > /dev/cpuset/camera-daemon/cpus
+echo 0-7 > /dev/cpuset/dexopt/cpus
+echo 0-7 > /dev/cpuset/foreground/cpus
+echo 0-7 > /dev/cpuset/top-app/cpus
+
+#Block cpus
+chmod 444 /dev/cpuset/camera-daemon/cpus
+chmod 444 /dev/cpuset/dexopt/cpus
+chmod 444 /dev/cpuset/foreground/cpus
+chmod 444 /dev/cpuset/top-app/cpus
+
+#########################
+# /sys/class/kgsl/kgsl-3d0/devfreq#
+#########################
+
+#Test gpu
+chmod 446 /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost
+
+#Perf gpu
+echo 3 > /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost
+
+#Block gpu
+chmod 444 /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost
+
+#########################
+# /sys/class/kgsl/kgsl-3d0/throttling#
+#########################
+
+#Test gpu
+chmod 446 /sys/class/kgsl/kgsl-3d0/throttling
+
+#Throttling gpu
+echo 0 > /sys/class/kgsl/kgsl-3d0/throttling
+
+#Block gpu
+chmod 444 /sys/class/kgsl/kgsl-3d0/throttling
+
+#########################
+# /sys/block/#
+#########################
+
+#Block
+echo 0 > /sys/block/dm-0/queue/iostats
+echo 0 > /sys/block/mmcblk0/queue/iostats
+echo 0 > /sys/block/mmcblk0rpmb/queue/iostats
+echo 0 > /sys/block/mmcblk1/queue/iostats
+echo 0 > /sys/block/loop0/queue/iostats
+echo 0 > /sys/block/loop1/queue/iostats
+echo 0 > /sys/block/loop2/queue/iostats
+echo 0 > /sys/block/loop3/queue/iostats
+echo 0 > /sys/block/loop4/queue/iostats
+echo 0 > /sys/block/loop5/queue/iostats
+echo 0 > /sys/block/loop6/queue/iostats
+echo 0 > /sys/block/loop7/queue/iostats
+echo 0 > /sys/block/sda/queue/iostats
+
+#########################
+# /sys/block/#
+#########################
+
+#Test power
+chmod 446 /sys/power/cpufreq_max_limit
+
+#Limit power
+echo "999999999" > /sys/power/cpufreq_max_limit
+
+#Block power
+chmod 444 /sys/power/cpufreq_max_limit
+chmod 444 /sys/power/cpufreq_min_limit
+
+#########################
+# /sys/class/kgsl/kgsl-3d0/#
+#########################
+
+#Snap tweak
+for smd in /sys/class/kgsl/kgsl-3d0
+  do
+    echo "0" > $smd/bus_split
+    echo "1" > $smd/force_clk_on
+    echo "1" > $smd/force_bus_on
+    echo "1" > $sms/force_rail_on
+    echo "1" > $smd/force_no_nap
+    echo "80" > $smd/idle_timer
+    echo "0" > $smd/max_pwrlevel
+  done
+
+#########################
+# /sys/devices/system/cpu/*/core_ctl/#
+#########################
+
+#Core ctl
+for cctl in /sys/devices/system/cpu/*/core_ctl
+ do
+   chmod 666 $cctl/enable
+   echo "0" > $cctl/enable
+   chmod 444 $cctl/enable
+ done
+ 
+#########################
+# /sys/class/sec/#
+#########################
+
+#Temperature disable
+chmod 000 /sys/class/sec/sec-ap-thermistor/temperature
+chmod 000 /sys/class/sec/sec-cf-thermistor/temperature
+chmod 000 /sys/class/sec/sec-cp-thermistor/temperature
+chmod 000 /sys/class/sec/sec-wf-thermistor/temperature
+
+#########################
+# /sys/devices/platform/soc/3d00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/#
+#########################
+chmod 000 /sys/devices/platform/soc/3d00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/temp
+
+#########################
+# /proc/sys/kernel/random/write_wakeup_threshold#
+#########################
+
+#Entropy
+echo 1024 > /proc/sys/kernel/random/write_wakeup_threshold
