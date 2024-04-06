@@ -74,3 +74,26 @@ echo 1612800000 > /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-l
 chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu0-cpu-l3-lat/min_freq
 chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu4-cpu-l3-lat/min_freq
 chmod 444 /sys/class/devfreq/18590000.qcom,devfreq-l3:qcom,cpu7-cpu-l3-lat/min_freq
+
+#########################
+# /sys/kernel/mm/swap/#
+# /proc/sys/vm/#
+#########################
+
+#Test zram
+chmod 446 /sys/kernel/mm/swap/vma_ra_enabled
+chmod 446 /proc/sys/vm/page-cluster
+chmod 446 /proc/sys/vm/compact_unevictable_allowed
+chmod 446 /proc/sys/vm/extfrag_threshold
+
+#Optimize zram
+echo "true" > /sys/kernel/mm/swap/vma_ra_enabled
+echo '2' > /proc/sys/vm/page-cluster
+echo '0' > /proc/sys/vm/compact_unevictable_allowed
+echo '500' > /proc/sys/vm/extfrag_threshold
+
+#Block zram
+chmod 444 /sys/kernel/mm/swap/vma_ra_enabled
+chmod 444 /proc/sys/vm/page-cluster
+chmod 444 /proc/sys/vm/compact_unevictable_allowed
+chmod 444 /proc/sys/vm/extfrag_threshold
