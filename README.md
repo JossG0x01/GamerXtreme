@@ -1,5 +1,5 @@
 # GamerXtreme
-Only works for Samsung Galaxy S20FE/865 device 
+It is only for the s20FE 2022, snapdragon 
 
 ## Credits
 - topjohnwu / Magisk - Magisk
