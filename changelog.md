@@ -1,4 +1,9 @@
 ## Change Log:
+- v1.2        
+ZRAM Removed       
+Scripts optimized            
+Now compatible with all kernels          
+
 - v1.1        
 Disable Log/System   
 Scripts optimized     
