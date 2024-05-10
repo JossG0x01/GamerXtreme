@@ -1,6 +1,4 @@
 ## Change Log:
-
-Creado por: José González
 - v1.2        
 ZRAM Removed       
 Scripts optimized            
